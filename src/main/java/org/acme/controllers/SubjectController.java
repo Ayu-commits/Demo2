@@ -32,7 +32,7 @@ public class SubjectController {
     public Subject enrolledStudentToSubject(@PathParam("id")Long sub_id,@PathParam("Id") Long student_id)
     {
             Subject obj = subjectService.enroll(sub_id,student_id);
-
+            return obj;
     }
 
 }
