@@ -11,7 +11,7 @@ public class StudentService {
     @Inject
     StudentRepo studentRepo;
 
-    Student createStudent(Student student)
+    public Student createStudent(Student student)
     {
         studentRepo.persist(student);
         return student;

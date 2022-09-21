@@ -24,6 +24,8 @@ public class StudentController {
     @Transactional
     public Student addStudent(Student student){
         Student obj = new Student();
+        obj.setName(student.getName());
+        studentService.createStudent(obj);
         return obj;
 
     }
