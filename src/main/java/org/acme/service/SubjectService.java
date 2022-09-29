@@ -2,6 +2,7 @@ package org.acme.service;
 
 import org.acme.entities.Student;
 import org.acme.entities.Subject;
+import org.acme.models.SubjectModel;
 import org.acme.repo.StudentRepo;
 import org.acme.repo.SubjectRepo;
 
@@ -16,20 +17,36 @@ public class SubjectService {
     StudentRepo studentRepo;
 
 
-    public Subject createSubject(Subject subject)
+    public SubjectModel createSubject(SubjectModel subject)
     {
-        subjectRepo.persist(subject);
+        Subject subject1 = new Subject();
+        subject1.setSubName(subject.getName());
+        subjectRepo.persist(subject1);
         return subject;
     }
 
 
-    public Subject enroll(Long id,Long Id)
+    public SubjectModel enroll(Long id,Long Id)
     {
+        //SubjectModel obj = new SubjectModel();
         Subject subject = subjectRepo.findById(id);
         Student student = studentRepo.findById(Id);
         subject.enrolled(student);
          subjectRepo.persist(subject);
-         return subject;
+         return toSubjectModel(subject);
 
+    }
+
+    public SubjectModel toSubjectModel(Subject obj){
+        SubjectModel model = new SubjectModel();
+        model.setName(obj.getSubName());
+        return model;
+    }
+
+    public Subject toSubjectUser(SubjectModel obj)
+    {
+        Subject sub = new Subject();
+        sub.setSubName(obj.getName());
+        return sub;
     }
 }

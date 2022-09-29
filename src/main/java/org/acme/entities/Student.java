@@ -1,18 +1,21 @@
 package org.acme.entities;
 
+import org.acme.models.StudentModel;
+
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Student {
+public class Student  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @ManyToMany(mappedBy = "enrolledStudents")
-    private Set<Subject> subjects = new HashSet<>();
+    private Set<Subject> subjects = new HashSet<>(); // transient has been added to remove error
 
     public Student() {
     }
@@ -43,4 +46,10 @@ public class Student {
     public Set<Subject> getSubjects() {
         return subjects;
     }
+
+    public void enrolled(Subject subject) {
+        subjects.add(subject);
+    }
+
+
 }

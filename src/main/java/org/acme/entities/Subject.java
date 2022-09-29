@@ -1,12 +1,16 @@
 package org.acme.entities;
 
+import javax.enterprise.inject.TransientReference;
+import javax.json.bind.annotation.JsonbTransient;
+import javax.json.bind.annotation.JsonbTypeSerializer;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 
 @Entity
-public class Subject {
+public class Subject implements Serializable  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,7 +24,8 @@ public class Subject {
             joinColumns = @JoinColumn(name = "subject_id"),
             inverseJoinColumns = @JoinColumn(name ="student_id")
     )
-    private Set<Student> enrolledStudents = new HashSet<>();
+    //@JsonbTransient
+    private  Set<Student> enrolledStudents = new HashSet<>();
 
     public Subject() {
     }

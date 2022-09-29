@@ -1,5 +1,6 @@
 package org.acme.controllers;
 
+import org.acme.models.SubjectModel;
 import org.acme.entities.Subject;
 import org.acme.service.SubjectService;
 
@@ -18,21 +19,21 @@ public class SubjectController {
 
     @POST
     @Transactional
-    public Subject createSubject(Subject subject)
+    public SubjectModel createSubject(SubjectModel subject)
     {
-        Subject obj = new Subject();
-        obj.setSubName(subject.getSubName());
-        subjectService.createSubject(obj);
-        return obj;
+        subject.setName(subject.getName());
+        subjectService.createSubject(subject);
+        return subject;
     }
-
     @PUT
     @Path("/{subjectId}/student/{studentId}")
     @Transactional
-    public Subject enrolledStudentToSubject(@PathParam("id")Long sub_id,@PathParam("Id") Long student_id)
+    public SubjectModel enrolledStudentToSubject(@PathParam("subjectId")Long sub_id,@PathParam("studentId") Long student_id)
     {
-            Subject obj = subjectService.enroll(sub_id,student_id);
+            SubjectModel obj = subjectService.enroll(sub_id,student_id);
             return obj;
     }
+
+
 
 }
