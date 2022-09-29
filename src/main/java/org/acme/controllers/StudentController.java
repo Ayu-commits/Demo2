@@ -32,15 +32,15 @@ public class StudentController {
     @Transactional
     public StudentModel getDetails(@PathParam("id") Long studentId)
     {
-        StudentModel subjects = null;
+        StudentModel studentModel = null;
         try{
-             subjects = studentService.getDetails(studentId);
+             studentModel = studentService.getDetails(studentId);
 
 
         }catch (Exception e)
         {
             e.printStackTrace();
         }
-        return subjects;
+        return studentModel;
     }
 }

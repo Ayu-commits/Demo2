@@ -1,5 +1,6 @@
 package org.acme.service;
 
+import org.acme.entities.Subject;
 import org.acme.models.StudentModel;
 import org.acme.entities.Student;
 import org.acme.repo.StudentRepo;
@@ -25,8 +26,13 @@ public class StudentService {
 
     public StudentModel getDetails(Long id) {
         Student student= new Student();
+        Subject subject = new Subject();
         try{
              student = studentRepo.findById(id);
+             subject = subjectRepo.findById(id);
+
+
+
 
 
         }catch (Exception e)
